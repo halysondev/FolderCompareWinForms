@@ -1,6 +1,6 @@
-﻿namespace FolderCompareWinForms
+namespace FolderCompareWinForms
 {
-    partial class Form1
+    partial class FolderCompareWin
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FolderCompareWin));
             labelA = new Label();
             label2 = new Label();
             folderA = new FolderBrowserDialog();
@@ -72,6 +72,19 @@
             label2.TabIndex = 1;
             label2.Text = "1. Select Folder A, Folder B, And Export Folder";
             // 
+            // folderA
+            // 
+            folderA.ShowHiddenFiles = true;
+            folderA.HelpRequest += folderA_HelpRequest;
+            // 
+            // folderB
+            // 
+            folderB.HelpRequest += folderB_HelpRequest;
+            // 
+            // folderExport
+            // 
+            folderExport.HelpRequest += folderExport_HelpRequest;
+            // 
             // labelB
             // 
             labelB.AutoSize = true;
@@ -88,6 +101,7 @@
             textBoxA.Name = "textBoxA";
             textBoxA.Size = new Size(359, 23);
             textBoxA.TabIndex = 3;
+            textBoxA.TextChanged += textBoxA_TextChanged;
             // 
             // buttonA
             // 
@@ -97,6 +111,7 @@
             buttonA.TabIndex = 4;
             buttonA.Text = "Select";
             buttonA.UseVisualStyleBackColor = true;
+            buttonA.Click += buttonA_Click;
             // 
             // buttonB
             // 
@@ -106,6 +121,7 @@
             buttonB.TabIndex = 5;
             buttonB.Text = "Select";
             buttonB.UseVisualStyleBackColor = true;
+            buttonB.Click += buttonB_Click;
             // 
             // textBoxB
             // 
@@ -113,6 +129,7 @@
             textBoxB.Name = "textBoxB";
             textBoxB.Size = new Size(359, 23);
             textBoxB.TabIndex = 6;
+            textBoxB.TextChanged += textBoxB_TextChanged;
             // 
             // label1
             // 
@@ -130,6 +147,7 @@
             textBoxExport.Name = "textBoxExport";
             textBoxExport.Size = new Size(359, 23);
             textBoxExport.TabIndex = 8;
+            textBoxExport.TextChanged += textBoxExport_TextChanged;
             // 
             // buttonExport
             // 
@@ -139,6 +157,7 @@
             buttonExport.TabIndex = 9;
             buttonExport.Text = "Select";
             buttonExport.UseVisualStyleBackColor = true;
+            buttonExport.Click += buttonExport_Click;
             // 
             // FoldersBox
             // 
@@ -179,6 +198,7 @@
             checkFolderA.TabIndex = 0;
             checkFolderA.Text = "Copy if not in Folder A";
             checkFolderA.UseVisualStyleBackColor = true;
+            checkFolderA.CheckedChanged += checkFolderA_CheckedChanged;
             // 
             // checkFolderB
             // 
@@ -189,6 +209,7 @@
             checkFolderB.TabIndex = 1;
             checkFolderB.Text = "Copy if not in Folder B";
             checkFolderB.UseVisualStyleBackColor = true;
+            checkFolderB.CheckedChanged += checkFolderB_CheckedChanged;
             // 
             // checkExisting
             // 
@@ -199,6 +220,7 @@
             checkExisting.TabIndex = 2;
             checkExisting.Text = "Replace existing files in export folder";
             checkExisting.UseVisualStyleBackColor = true;
+            checkExisting.CheckedChanged += checkExisting_CheckedChanged;
             // 
             // buttonConfirm
             // 
@@ -208,6 +230,7 @@
             buttonConfirm.TabIndex = 12;
             buttonConfirm.Text = "EXPORT";
             buttonConfirm.UseVisualStyleBackColor = true;
+            buttonConfirm.Click += buttonConfirm_Click;
             // 
             // logsBox
             // 
@@ -218,6 +241,7 @@
             logsBox.SelectionMode = SelectionMode.None;
             logsBox.Size = new Size(760, 244);
             logsBox.TabIndex = 13;
+            logsBox.SelectedIndexChanged += logsBox_SelectedIndexChanged;
             // 
             // Form1
             // 
