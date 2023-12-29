@@ -15,12 +15,8 @@ namespace FolderCompareWinForms
             {
                 FolderCompare.FolderA = folderA.SelectedPath;
                 textBoxA.Text = folderA.SelectedPath;
+                UpdateLogMessage("Folder A: " + folderA.SelectedPath);
             }
-        }
-
-        private void textBoxA_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonB_Click(object sender, EventArgs e)
@@ -30,12 +26,8 @@ namespace FolderCompareWinForms
             {
                 FolderCompare.FolderB = folderB.SelectedPath;
                 textBoxB.Text = folderB.SelectedPath;
+                UpdateLogMessage("Folder B: " + folderB.SelectedPath);
             }
-        }
-
-        private void textBoxB_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonExport_Click(object sender, EventArgs e)
@@ -45,12 +37,8 @@ namespace FolderCompareWinForms
             {
                 FolderCompare.FolderExport = folderExport.SelectedPath;
                 textBoxExport.Text = folderExport.SelectedPath;
+                UpdateLogMessage("Folder Export: " + folderExport.SelectedPath);
             }
-        }
-
-        private void textBoxExport_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void checkFolderA_CheckedChanged(object sender, EventArgs e)
@@ -58,10 +46,12 @@ namespace FolderCompareWinForms
             if(checkFolderA.Checked == true)
             {
                 FolderCompare.CheckFolderA = true;
+                UpdateLogMessage("Check Folder A: " + FolderCompare.CheckFolderA);
             }
             else
             {
                 FolderCompare.CheckFolderA = false;
+                UpdateLogMessage("Check Folder A: " + FolderCompare.CheckFolderA);
             }
         }
 
@@ -70,10 +60,12 @@ namespace FolderCompareWinForms
             if (checkFolderB.Checked == true)
             {
                 FolderCompare.CheckFolderB = true;
+                UpdateLogMessage("Check Folder B: " + FolderCompare.CheckFolderB);
             }
             else
             {
                 FolderCompare.CheckFolderB = false;
+                UpdateLogMessage("Check Folder B: " + FolderCompare.CheckFolderB);
             }
         }
 
@@ -82,53 +74,51 @@ namespace FolderCompareWinForms
             if (checkExisting.Checked == true)
             {
                 FolderCompare.checkExisting = true;
+                UpdateLogMessage("Check Existing: " + FolderCompare.checkExisting);
             }
             else
             {
                 FolderCompare.checkExisting = false;
+                UpdateLogMessage("Check Existing: " + FolderCompare.checkExisting);
             }
         }
 
-        private void buttonConfirm_Click(object sender, EventArgs e)
+        private async void buttonConfirm_Click(object sender, EventArgs e)
         {
-            FolderCompare.Compare();
+            UpdateLogMessage("Comparing and copying Init!");
+            await FolderCompare.CompareAsync();
+            UpdateLogMessage("Comparing and copying Finished!");
         }
 
-        private void logsBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void UpdateLogMessage(string message)
         {
-
+            // This method ensures that the update is performed on the UI thread
+            ThreadSafeUpdate(() => textBox1.AppendText(message + Environment.NewLine));
         }
 
-        private void folderA_HelpRequest(object sender, EventArgs e)
+        private void ThreadSafeUpdate(Action updateAction)
         {
-
-        }
-
-        private void folderB_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        private void folderExport_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        public ListBox LogsBox
-        {
-            get { return logsBox; } // Assuming logsBox is the name of your ListBox control
+            if (this.InvokeRequired)
+            {
+                // If we're not on the UI thread, use Invoke to execute the updateAction on the UI thread
+                this.Invoke(updateAction);
+            }
+            else
+            {
+                // If we're on the UI thread, execute the updateAction directly
+                updateAction();
+            }
         }
 
         public static FolderCompareWin GetInstance()
         {
-            // If the instance doesn't exist, create it
-            if (instance == null)
-            {
-                instance = new FolderCompareWin();
-            }
-
-            // Return the instance
             return instance;
         }
+
+        public static void SetInstance(FolderCompareWin instance)
+        {
+            FolderCompareWin.instance = instance;
+        }
+
     }
 }

@@ -8,10 +8,10 @@ namespace FolderCompareWinForms
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FolderCompareWin());
+            FolderCompareWin mainForm = new FolderCompareWin();
+            FolderCompareWin.SetInstance(mainForm); // Set the instance before the form is shown
+            Application.Run(mainForm);
         }
     }
 }

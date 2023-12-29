@@ -20,52 +20,44 @@ namespace FolderCompareWinForms
         public static bool CheckFolderB = false;
         public static bool checkExisting = false;
 
-        public static FolderCompareWin form = FolderCompareWin.GetInstance();
-
-        public static void UpdateLogMessage(string message)
+        public static async Task CompareAsync()
         {
-            FolderCompareWin form = FolderCompareWin.GetInstance();
-
-            // Check if invoke is required for thread safety
-            if (form.InvokeRequired)
-            {
-                form.Invoke(new Action(() => form.LogsBox.Items.Add(message)));
-            }
-            else
-            {
-                form.LogsBox.Items.Add(message);
-            }
+            await Task.Run(() => Compare());
         }
+
         public static void Compare()
         {
+            var form = FolderCompareWin.GetInstance();
             if (FolderA == "" || FolderB == "" || FolderExport == "")
             {
                 MessageBox.Show("Please select folders and export path.");
-                UpdateLogMessage("Please select folders and export path.");
+                form.UpdateLogMessage("Please select folders and export path.");
                 return;
             }
             if (FolderA == FolderB || FolderA == FolderExport || FolderB == FolderExport)
             {
                 MessageBox.Show("Please select different folders.");
-                UpdateLogMessage("Please select different folders.");
+                form.UpdateLogMessage("Please select different folders.");
                 return;
             }
 
             try
             {
                 var stopwatch = new Stopwatch();
+                stopwatch.Start();
 
                 CompareAndCopy(FolderA, FolderB, FolderExport, CheckFolderA, CheckFolderB, checkExisting);
             
                 stopwatch.Stop();
 
-                UpdateLogMessage("Comparing and copying Sucess!");
-                UpdateLogMessage("time: " + FormatElapsedTime(stopwatch.Elapsed));
+                var elapsedTime = stopwatch.Elapsed;
+                form.UpdateLogMessage("Comparing and copying Sucess!");
+                form.UpdateLogMessage("time: " + FormatElapsedTime(elapsedTime));
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: \n" + ex.Message);
-                UpdateLogMessage("Error: \n" + ex.Message);
+                form.UpdateLogMessage("Error: \n" + ex.Message);
                 return;
             }
 
@@ -73,6 +65,7 @@ namespace FolderCompareWinForms
 
         static void CompareAndCopy(string sourceDir, string targetDir, string destDir, bool copyIfNotInSource, bool copyIfNotInTarget, bool replaceExistingFiles)
         {
+            var form = FolderCompareWin.GetInstance();
             DirectoryInfo dir1 = new DirectoryInfo(sourceDir);
             DirectoryInfo dir2 = new DirectoryInfo(targetDir);
 
@@ -103,7 +96,7 @@ namespace FolderCompareWinForms
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error in process file: \n" + ex.Message);
-                    UpdateLogMessage("Error in process file: \n" + ex.Message);
+                    form.UpdateLogMessage("Error in process file: \n" + ex.Message);
                 }
             });
 
@@ -124,7 +117,7 @@ namespace FolderCompareWinForms
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error in process file: \n" + ex.Message);
-                        UpdateLogMessage("Error in process file: \n" + ex.Message);
+                        form.UpdateLogMessage("Error in process file: \n" + ex.Message);
                     }
                 });
             }
@@ -132,6 +125,7 @@ namespace FolderCompareWinForms
 
         private static void CopyFile(string sourceFilePath, string destDir, string relativePath, bool replaceExistingFiles)
         {
+            var form = FolderCompareWin.GetInstance();
             string destFilePath = Path.Combine(destDir, relativePath);
             string destFileDir = Path.GetDirectoryName(destFilePath);
 
@@ -144,7 +138,7 @@ namespace FolderCompareWinForms
             {
                 File.Copy(sourceFilePath, destFilePath, replaceExistingFiles);
             }
-            UpdateLogMessage("File Copy: " + relativePath);
+            form.UpdateLogMessage("File Copy: " + relativePath);
         }
 
         private static bool FileContentsAreEqual(string file1Path, string file2Path)

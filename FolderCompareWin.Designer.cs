@@ -47,7 +47,7 @@ namespace FolderCompareWinForms
             checkFolderB = new CheckBox();
             checkFolderA = new CheckBox();
             buttonConfirm = new Button();
-            logsBox = new ListBox();
+            textBox1 = new TextBox();
             FoldersBox.SuspendLayout();
             SettingsBox.SuspendLayout();
             SuspendLayout();
@@ -74,15 +74,14 @@ namespace FolderCompareWinForms
             // folderA
             // 
             folderA.ShowHiddenFiles = true;
-            folderA.HelpRequest += folderA_HelpRequest;
             // 
             // folderB
             // 
-            folderB.HelpRequest += folderB_HelpRequest;
+            folderB.ShowHiddenFiles = true;
             // 
             // folderExport
             // 
-            folderExport.HelpRequest += folderExport_HelpRequest;
+            folderExport.ShowHiddenFiles = true;
             // 
             // labelB
             // 
@@ -100,7 +99,6 @@ namespace FolderCompareWinForms
             textBoxA.Name = "textBoxA";
             textBoxA.Size = new Size(359, 23);
             textBoxA.TabIndex = 3;
-            textBoxA.TextChanged += textBoxA_TextChanged;
             // 
             // buttonA
             // 
@@ -128,7 +126,6 @@ namespace FolderCompareWinForms
             textBoxB.Name = "textBoxB";
             textBoxB.Size = new Size(359, 23);
             textBoxB.TabIndex = 6;
-            textBoxB.TextChanged += textBoxB_TextChanged;
             // 
             // label1
             // 
@@ -146,7 +143,6 @@ namespace FolderCompareWinForms
             textBoxExport.Name = "textBoxExport";
             textBoxExport.Size = new Size(359, 23);
             textBoxExport.TabIndex = 8;
-            textBoxExport.TextChanged += textBoxExport_TextChanged;
             // 
             // buttonExport
             // 
@@ -231,23 +227,22 @@ namespace FolderCompareWinForms
             buttonConfirm.UseVisualStyleBackColor = true;
             buttonConfirm.Click += buttonConfirm_Click;
             // 
-            // logsBox
+            // textBox1
             // 
-            logsBox.FormattingEnabled = true;
-            logsBox.ItemHeight = 15;
-            logsBox.Location = new Point(12, 294);
-            logsBox.Name = "logsBox";
-            logsBox.SelectionMode = SelectionMode.None;
-            logsBox.Size = new Size(760, 244);
-            logsBox.TabIndex = 13;
-            logsBox.SelectedIndexChanged += logsBox_SelectedIndexChanged;
+            textBox1.Location = new Point(12, 294);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(763, 252);
+            textBox1.TabIndex = 13;
+            textBox1.ScrollBars = ScrollBars.Vertical;
             // 
             // FolderCompareWin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 549);
-            Controls.Add(logsBox);
+            Controls.Add(textBox1);
             Controls.Add(buttonConfirm);
             Controls.Add(SettingsBox);
             Controls.Add(FoldersBox);
@@ -283,6 +278,6 @@ namespace FolderCompareWinForms
         private CheckBox checkFolderA;
         private CheckBox checkExisting;
         private Button buttonConfirm;
-        public ListBox logsBox;
+        private TextBox textBox1;
     }
 }
