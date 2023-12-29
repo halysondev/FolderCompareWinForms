@@ -28,7 +28,6 @@ namespace FolderCompareWinForms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FolderCompareWin));
             labelA = new Label();
             label2 = new Label();
             folderA = new FolderBrowserDialog();
@@ -44,9 +43,9 @@ namespace FolderCompareWinForms
             buttonExport = new Button();
             FoldersBox = new GroupBox();
             SettingsBox = new GroupBox();
-            checkFolderA = new CheckBox();
-            checkFolderB = new CheckBox();
             checkExisting = new CheckBox();
+            checkFolderB = new CheckBox();
+            checkFolderA = new CheckBox();
             buttonConfirm = new Button();
             logsBox = new ListBox();
             FoldersBox.SuspendLayout();
@@ -189,16 +188,16 @@ namespace FolderCompareWinForms
             SettingsBox.TabStop = false;
             SettingsBox.Text = "Settings";
             // 
-            // checkFolderA
+            // checkExisting
             // 
-            checkFolderA.AutoSize = true;
-            checkFolderA.Location = new Point(6, 26);
-            checkFolderA.Name = "checkFolderA";
-            checkFolderA.Size = new Size(145, 19);
-            checkFolderA.TabIndex = 0;
-            checkFolderA.Text = "Copy if not in Folder A";
-            checkFolderA.UseVisualStyleBackColor = true;
-            checkFolderA.CheckedChanged += checkFolderA_CheckedChanged;
+            checkExisting.AutoSize = true;
+            checkExisting.Location = new Point(6, 95);
+            checkExisting.Name = "checkExisting";
+            checkExisting.Size = new Size(219, 19);
+            checkExisting.TabIndex = 2;
+            checkExisting.Text = "Replace existing files in export folder";
+            checkExisting.UseVisualStyleBackColor = true;
+            checkExisting.CheckedChanged += checkExisting_CheckedChanged;
             // 
             // checkFolderB
             // 
@@ -211,16 +210,16 @@ namespace FolderCompareWinForms
             checkFolderB.UseVisualStyleBackColor = true;
             checkFolderB.CheckedChanged += checkFolderB_CheckedChanged;
             // 
-            // checkExisting
+            // checkFolderA
             // 
-            checkExisting.AutoSize = true;
-            checkExisting.Location = new Point(6, 95);
-            checkExisting.Name = "checkExisting";
-            checkExisting.Size = new Size(219, 19);
-            checkExisting.TabIndex = 2;
-            checkExisting.Text = "Replace existing files in export folder";
-            checkExisting.UseVisualStyleBackColor = true;
-            checkExisting.CheckedChanged += checkExisting_CheckedChanged;
+            checkFolderA.AutoSize = true;
+            checkFolderA.Location = new Point(6, 26);
+            checkFolderA.Name = "checkFolderA";
+            checkFolderA.Size = new Size(145, 19);
+            checkFolderA.TabIndex = 0;
+            checkFolderA.Text = "Copy if not in Folder A";
+            checkFolderA.UseVisualStyleBackColor = true;
+            checkFolderA.CheckedChanged += checkFolderA_CheckedChanged;
             // 
             // buttonConfirm
             // 
@@ -243,7 +242,7 @@ namespace FolderCompareWinForms
             logsBox.TabIndex = 13;
             logsBox.SelectedIndexChanged += logsBox_SelectedIndexChanged;
             // 
-            // Form1
+            // FolderCompareWin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -253,8 +252,7 @@ namespace FolderCompareWinForms
             Controls.Add(SettingsBox);
             Controls.Add(FoldersBox);
             Controls.Add(label2);
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Form1";
+            Name = "FolderCompareWin";
             Text = "Folder Compare";
             FoldersBox.ResumeLayout(false);
             FoldersBox.PerformLayout();
