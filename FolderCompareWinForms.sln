@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderCompareWinForms", "FolderCompareWinForms.csproj", "{A3756B22-C49C-4AF5-B909-49903A715D69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3756B22-C49C-4AF5-B909-49903A715D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3756B22-C49C-4AF5-B909-49903A715D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3756B22-C49C-4AF5-B909-49903A715D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3756B22-C49C-4AF5-B909-49903A715D69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B4AB736-E886-434F-87B9-A0230B386F12}
+	EndGlobalSection
+EndGlobal
